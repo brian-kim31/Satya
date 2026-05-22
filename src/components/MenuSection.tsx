@@ -2,38 +2,38 @@ const dishes = [
   {
     name: 'Lamb Biryani',
     desc: 'Slow-cooked basmati rice layered with tender, spiced lamb — sealed and dum-cooked for fragrant perfection.',
-    tag: 'Chef\'s Signature',
-    emoji: '🍛',
+    tag: "Chef's Signature",
+    img: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&q=85&auto=format&fit=crop',
   },
   {
     name: 'Chicken Tikka Masala',
     desc: 'Smoky tandoor-kissed chicken in a velvety, hand-ground tomato and cream masala — a timeless classic.',
     tag: 'Most Loved',
-    emoji: '🫕',
+    img: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&q=85&auto=format&fit=crop',
   },
   {
     name: 'Mixed Tandoori Grill',
     desc: 'A showstopper platter of marinated chicken, lamb chops, seekh kebabs and paneer tikka from our clay oven.',
     tag: 'Sharing Platter',
-    emoji: '🍢',
+    img: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=85&auto=format&fit=crop',
   },
   {
     name: 'Saag Paneer',
     desc: 'Fresh spinach slow-wilted with aromatic spices, folded through soft cubes of homemade cottage cheese.',
     tag: 'Vegetarian',
-    emoji: '🥬',
+    img: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=85&auto=format&fit=crop',
   },
   {
     name: 'Garlic Naan',
     desc: 'Stone-baked to a perfect char, brushed with garlic butter and fresh coriander straight from the tandoor.',
     tag: 'Fresh Baked',
-    emoji: '🫓',
+    img: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&q=85&auto=format&fit=crop',
   },
   {
     name: 'Mango Kulfi',
     desc: 'Dense, creamy frozen dessert infused with Alphonso mango and cardamom — the perfect sweet finish.',
     tag: 'Dessert',
-    emoji: '🍧',
+    img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=85&auto=format&fit=crop',
   },
 ]
 
@@ -66,19 +66,31 @@ export default function MenuSection() {
           {dishes.map((dish, i) => (
             <div
               key={dish.name}
-              className={`reveal reveal-delay-${(i % 3) + 1} card-lift group bg-[#1E1008] border border-[#2A1E14] p-7 flex flex-col gap-4`}
+              className={`reveal reveal-delay-${(i % 3) + 1} card-lift group bg-[#1E1008] border border-[#2A1E14] overflow-hidden flex flex-col`}
             >
-              <div className="flex items-start justify-between gap-3">
-                <span className="text-3xl" role="img" aria-label={dish.name}>{dish.emoji}</span>
-                <span className="text-[10px] tracking-[.14em] uppercase text-[#D4A843] border border-[#D4A843]/30 px-2.5 py-1 whitespace-nowrap">
-                  {dish.tag}
-                </span>
+              {/* Food photo */}
+              <div className="img-zoom h-48 overflow-hidden flex-shrink-0">
+                <img
+                  src={dish.img}
+                  alt={dish.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
-              <h3 className="font-playfair text-xl font-bold text-[#F5EDD6] group-hover:text-[#D4A843] transition-colors">
-                {dish.name}
-              </h3>
-              <p className="text-[#B8A082] text-sm leading-relaxed flex-1">{dish.desc}</p>
-              <div className="h-px bg-gradient-to-r from-[#D4A843]/30 to-transparent mt-1" />
+
+              {/* Content */}
+              <div className="p-6 flex flex-col gap-3 flex-1">
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="font-playfair text-xl font-bold text-[#F5EDD6] group-hover:text-[#D4A843] transition-colors leading-tight">
+                    {dish.name}
+                  </h3>
+                  <span className="text-[10px] tracking-[.14em] uppercase text-[#D4A843] border border-[#D4A843]/30 px-2.5 py-1 whitespace-nowrap flex-shrink-0">
+                    {dish.tag}
+                  </span>
+                </div>
+                <p className="text-[#B8A082] text-sm leading-relaxed flex-1">{dish.desc}</p>
+                <div className="h-px bg-gradient-to-r from-[#D4A843]/30 to-transparent mt-1" />
+              </div>
             </div>
           ))}
         </div>

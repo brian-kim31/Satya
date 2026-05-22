@@ -1,4 +1,6 @@
 import RevealObserver from '@/components/RevealObserver'
+import ScrollProgress from '@/components/ScrollProgress'
+import WhatsAppButton from '@/components/WhatsAppButton'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
@@ -13,6 +15,8 @@ export default function Home() {
   return (
     <>
       <RevealObserver />
+      <ScrollProgress />
+      <WhatsAppButton />
       <Navbar />
       <Hero />
       <About />

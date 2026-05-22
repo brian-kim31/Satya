@@ -1,6 +1,25 @@
 'use client'
 import { useState, useEffect } from 'react'
 
+function useIsOpen() {
+  const [open, setOpen] = useState<boolean | null>(null)
+  useEffect(() => {
+    const check = () => {
+      const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }))
+      const day = now.getDay() // 0=Sun,1=Mon,...,6=Sat
+      const mins = now.getHours() * 60 + now.getMinutes()
+      if (day === 1) { setOpen(false); return } // Monday closed
+      const open = day >= 2 && day <= 5 ? 16 * 60 + 30 : 16 * 60 // Tue-Fri 4:30pm, Sat-Sun 4:00pm
+      const close = day === 0 ? 21 * 60 : 22 * 60 // Sun 9pm, else 10pm
+      setOpen(mins >= open && mins < close)
+    }
+    check()
+    const id = setInterval(check, 60_000)
+    return () => clearInterval(id)
+  }, [])
+  return open
+}
+
 const links = [
   { href: '#about',    label: 'Our Story'  },
   { href: '#menu',     label: 'Menu'       },
@@ -12,6 +31,7 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false)
   const [menuOpen, setMenuOpen]   = useState(false)
+  const isOpen = useIsOpen()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 80)
@@ -54,6 +74,11 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-5">
+            {isOpen !== null && (
+              <span className={`text-[10px] tracking-[.14em] uppercase font-semibold px-2.5 py-1 rounded-full ${isOpen ? 'bg-emerald-900/50 text-emerald-400' : 'bg-[#2A1E14] text-[#6B5A44]'}`}>
+                {isOpen ? '● Open Now' : '● Closed'}
+              </span>
+            )}
             <a
               href="tel:01162592765"
               className="flex items-center gap-2 text-[#B8A082] hover:text-[#D4A843] text-sm transition-colors"

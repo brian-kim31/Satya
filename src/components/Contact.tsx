@@ -80,6 +80,20 @@ export default function Contact() {
               </div>
             </div>
 
+            {/* Map */}
+            <div className="mb-10 overflow-hidden rounded-sm border border-[#2A1E14]">
+              <iframe
+                title="Satya Restaurant location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2418.2!2d-1.0332951!3d52.5708508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487764fff025878f%3A0x1d8cfdb2323ceb6!2sSatya%20Restaurant!5e0!3m2!1sen!2suk!4v1700000000000!5m2!1sen!2suk"
+                width="100%"
+                height="200"
+                style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) saturate(0.4) brightness(0.85)' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+
             {/* Catering CTA */}
             <div className="bg-[#1E1008] border border-[#D4A843]/20 p-6">
               <p className="text-[#D4A843] text-[11px] tracking-[.16em] uppercase font-medium mb-2">Catering Enquiries</p>
